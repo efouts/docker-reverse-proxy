@@ -12,5 +12,6 @@ RUN apk update \
 ADD supervisord.conf /tmp/supervisord.conf
 ADD consul-template.conf /tmp/
 ADD nginx.ctmpl /tmp/
+RUN mkdir /tmp/nginx
 
 CMD ["/usr/bin/supervisord", "-c", "/tmp/supervisord.conf"]
