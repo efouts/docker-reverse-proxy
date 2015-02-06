@@ -9,9 +9,10 @@ RUN apk update \
   && apk del build-base git go \
   && rm -rf /var/cache/apk/*
 
-ADD supervisord.conf /tmp/supervisord.conf
-ADD consul-template.conf /tmp/
-ADD nginx.ctmpl /tmp/
+ADD proxy_params /etc/nginx/proxy_params
+ADD supervisord.conf /etc/supervisord.conf
 RUN mkdir /tmp/nginx
 
-CMD ["/usr/bin/supervisord", "-c", "/tmp/supervisord.conf"]
+VOLUME ["/etc/consul-template/"]
+
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
